@@ -1,15 +1,29 @@
 ﻿<!DOCTYPE html>
-<html ng-app="CelebPage">
+<html>
 <head>
-    <title></title>
+    <title>Celebrities</title>
 	<meta charset="utf-8" />
+    <link href="Content/bootstrap.css" rel="stylesheet"/>
 </head>
-<body>
+<body ng-app="CelebPage">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="navbar-brand">Celebrities</div>
+            </div>
+        </div>
+    </nav>
 
+    <div class="container">
+        <div ng-include="'App/Celebs/CelebsListView.html'"></div>
+    </div>
 </body>
 </html>
 
 <script src="scripts/angular.js"></script>
 <script src="scripts/angular-resource.js"></script>
+
+<script src="App/app.js"></script>
+<script src="App/Celebs/CelebsListCtrl.js"></script>
 <script src="Services/resouce.js"></script>
 <script src="Services/CelebResource.js"></script>
