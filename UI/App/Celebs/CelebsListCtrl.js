@@ -26,9 +26,21 @@
             vm.isCreate = !vm.isCreate;
         }
 
-        vm.save = function (celeb) {
-            if (vm.celebs.)
-            vm.celebs.push(vm.celeb);
+        vm.save = function () {
+            var c;
+            for (var i = 0; i < vm.celebs.length; i++) {
+                if (vm.celebs[i].name == vm.celeb.name)
+                  c =  vm.celebs[i];
+            }
+
+            //var c = vm.celebs.find(c => c.name == vm.celeb.name)
+
+            if (c) {
+                c = vm.celeb;
+            }
+            else {
+                vm.celebs.push(vm.celeb);
+            }
             //CelebResource.query()
         }
 
@@ -40,11 +52,15 @@
             if (!vm.isCreate){
                 vm.isCreate = true;
             }
-            vm.celeb = celeb;
+            vm.celeb = angular.copy(celeb);
         }
 
-        $scope.$watch("vm.celeb", function (newValue) {
+        $scope.$watchCollection("vm.celeb", function (newValue) {
             vm.celeb = newValue;
+        })
+
+        $scope.$watch("vm.celebs", function (newValue) {
+            vm.celebs = newValue;
         })
     }
 }());
