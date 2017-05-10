@@ -1,22 +1,17 @@
 ﻿
 (function () {
     angular.module("CelebPage", [])
-    .controller("CelebsListCtrl", ["celebResource", CelebsListCtrl]);
+    .controller("list", CelebsListCtrl); // "celebResource"
 
-    function CelebsListCtrl(celebResource) {
-        var vm = this;
+    function CelebsListCtrl() { // celebResource
+        var list = this;
 
-        vm.celebs = [
+        list.celebs =
         {
-            "Name": "Test1",
-            "Age": 54,
-            "Country": "Test1"
-        },
-        {
-            "Name": "Test2",
-            "Age": 12,
-            "Country": "Tes2"
-        }]
+            "name": "Test1",
+            "age": 54,
+            "country": "Test1"
+        };
 
         //celebResource.query(function (data) {
         //    vm.celebs = data;

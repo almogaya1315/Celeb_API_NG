@@ -1,4 +1,4 @@
 ﻿
 (function () {
-    var app = angular.module("CelebPage", ["resource"])
+    var app = angular.module("CelebPage", []) // "resource"
 }());
