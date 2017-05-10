@@ -1,19 +1,25 @@
 ﻿
 (function () {
-    angular.module("CelebPage", [])
-    .controller("list", CelebsListCtrl); // "celebResource"
+    angular.module("CelebPage")
+           .controller("CelebsListCtrl", ["CelebResource", CelebsListCtrl]);
 
-    function CelebsListCtrl() { // celebResource
-        var list = this;
+    function CelebsListCtrl(CelebResource) { 
+    
+        var vm = this;
 
-        list.celebs =
+        vm.celebs = [
         {
             "name": "Test1",
             "age": 54,
             "country": "Test1"
-        };
+        },
+        {
+            "name": "Test2",
+            "age": 12,
+            "country": "Test2"
+        }];
 
-        //celebResource.query(function (data) {
+        //CelebResource.query(function (data) {
         //    vm.celebs = data;
         //});
     }

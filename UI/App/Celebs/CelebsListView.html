@@ -1,6 +1,6 @@
 ﻿
 <div class="panel panel-primary"
-     ng-controller="CelebsListCtrl as list">
+     ng-controller="CelebsListCtrl as vm">
     <div class="panel-heading" style="font-size:large">
         Celebs list
     </div>
@@ -15,7 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="celeb in list.celebs">
+                <tr ng-repeat="celeb in vm.celebs">
                     <td>{{celeb.name}}</td>
                     <td>{{celeb.age}}</td>
                     <td>{{celeb.country}}</td>
