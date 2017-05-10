@@ -1,9 +1,9 @@
 ﻿
 (function () {
     angular.module("CelebPage")
-           .controller("CelebsListCtrl", ["CelebResource", CelebsListCtrl]);
+           .controller("CelebsListCtrl", CelebsListCtrl); // "CelebResource"
 
-    function CelebsListCtrl(CelebResource) { 
+    function CelebsListCtrl() { // CelebResource
     
         var vm = this;
 
