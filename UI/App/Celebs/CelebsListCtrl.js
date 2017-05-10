@@ -6,8 +6,20 @@
     function CelebsListCtrl(celebResource) {
         var vm = this;
 
-        celebResource.query(function (data) {
-            vm.celebs = data;
-        });
+        vm.celebs = [
+        {
+            "Name": "Test1",
+            "Age": 54,
+            "Country": "Test1"
+        },
+        {
+            "Name": "Test2",
+            "Age": 12,
+            "Country": "Tes2"
+        }]
+
+        //celebResource.query(function (data) {
+        //    vm.celebs = data;
+        //});
     }
 }());
