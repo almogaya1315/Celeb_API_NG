@@ -1,9 +1,8 @@
 ﻿
 (function () {
-    angular.module("CelebPage")
-           .controller("CelebsListCtrl", CelebsListCtrl); // "CelebResource"
+    app.controller("CelebsListCtrl", ["CelebResource", "$scope", CelebsListCtrl]); 
 
-    function CelebsListCtrl() { // CelebResource
+    function CelebsListCtrl(CelebResource, $scope) { 
     
         var vm = this;
 
@@ -20,7 +19,32 @@
         }];
 
         //CelebResource.query(function (data) {
-        //    vm.celebs = data;
+        //    vm.celebs = JSON.parse(data);
         //});
+
+        vm.create = function () {
+            vm.isCreate = !vm.isCreate;
+        }
+
+        vm.save = function (celeb) {
+            if (vm.celebs.)
+            vm.celebs.push(vm.celeb);
+            //CelebResource.query()
+        }
+
+        vm.del = function (index) {
+            vm.celebs.splice(index, 1); // find(c => c.name = celeb.name);
+        }
+
+        vm.put = function (celeb) {
+            if (!vm.isCreate){
+                vm.isCreate = true;
+            }
+            vm.celeb = celeb;
+        }
+
+        $scope.$watch("vm.celeb", function (newValue) {
+            vm.celeb = newValue;
+        })
     }
 }());

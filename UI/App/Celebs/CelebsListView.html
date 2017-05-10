@@ -1,26 +1,37 @@
 ﻿
 <div class="panel panel-primary"
      ng-controller="CelebsListCtrl as vm">
-    <div class="panel-heading" style="font-size:large">
+    <div class="panel-heading" style="font-size:large; display:inline">
         Celebs list
-    </div>
-
+        
+     </div>  
+    <input ng-click="vm.create()" type="button" value="create" />
     <div class="panel-body">
         <table class="table">
             <thead>
                 <tr>
                     <td>Name</td>
                     <td>Age</td>
-                    <td>Country</td>
+                    <td colspan="3">Country</td>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="celeb in vm.celebs">
+                <tr ng-repeat="celeb in vm.celebs track by $index">
                     <td>{{celeb.name}}</td>
                     <td>{{celeb.age}}</td>
                     <td>{{celeb.country}}</td>
+                    <td><input type="button" value="del" ng-click="vm.del($index)"/></td>
+                    <td><input type="button" value="edit" ng-click="vm.put(celeb)"/></td>
                 </tr>
             </tbody>
+            <tfoot ng-init="vm.isCreate = false" ng-show="vm.isCreate">
+                <tr>
+                    <td><input type="text" ng-model="vm.celeb.name"/></td>
+                    <td><input type="number" min="0" ng-model="vm.celeb.age"/></td>
+                    <td><input type="text" ng-model="vm.celeb.country"/></td>
+                    <td ng-click="vm.save()"><input type="button" value="save"/></td>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </div>

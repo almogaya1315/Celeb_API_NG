@@ -10,7 +10,7 @@ using System.Web.Http.Cors;
 
 namespace API.Controllers
 {
-    [EnableCorsAttribute("http://localhost:56399", "*", "*")]
+    [EnableCorsAttribute("http://localhost:55152", "*", "*")]
     public class CelebsController : ApiController
     {
         CelebContext db { get; set; }
@@ -21,7 +21,7 @@ namespace API.Controllers
             using (db = new CelebContext())
             {
                 List<CelebModel> models = new List<CelebModel>();
-                foreach (var entity in db.GetCelebs()) models.Add(new CelebModel()
+                foreach (var entity in db.Celebrities) models.Add(new CelebModel()
                 {
                     Id = entity.Id,
                     Name = entity.Name,

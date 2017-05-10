@@ -1,9 +1,8 @@
 ﻿
 (function () {
-    angular.module("resource")
-    .factory("celebResource", ["$resource", "appSettings", celebResource])
+    app.factory("CelebResource", ["$resource", "appSettings", celebResource])
 
     function celebResource($resource, appSettings) {
-        return $resource(appSettings.serverPath + "/api/Celebs/:id");
+        return $resource(appSettings.serverPath + "/api/Celebs");
     }
 }());
