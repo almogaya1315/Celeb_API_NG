@@ -4,6 +4,6 @@
     .factory("celebResource", ["$resource", "appSettings", celebResource])
 
     function celebResource($resource, appSettings) {
-        return $resource(appSettings.serverPath + "/api/Celeb/:id")
+        return $resource(appSettings.serverPath + "/api/Celebs/:id")
     }
 }());
