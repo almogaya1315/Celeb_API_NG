@@ -1,11 +1,12 @@
 ﻿
 <div class="panel panel-primary"
      ng-controller="CelebsListCtrl as vm">
-    <div class="panel-heading" style="font-size:large; display:inline">
-        Celebs list
-        
+    <div class="panel-heading">
+        <div style="display:inline; font-size:large">
+            Celebs list
+        </div>
+        <input ng-click="vm.create()" type="button" value="create" style="color:black; margin-left:20%"/> Toggle show / hide
      </div>  
-    <input ng-click="vm.create()" type="button" value="create" />
     <div class="panel-body">
         <table class="table">
             <thead>
@@ -20,7 +21,7 @@
                     <td>{{celeb.name}}</td>
                     <td>{{celeb.age}}</td>
                     <td>{{celeb.country}}</td>
-                    <td><input type="button" value="del" ng-click="vm.del($index)"/></td>
+                    <td><input type="button" value="del" ng-click="vm.del($index, celeb.id)"/></td>
                     <td><input type="button" value="edit" ng-click="vm.put(celeb)"/></td>
                 </tr>
             </tbody>

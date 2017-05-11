@@ -36,7 +36,7 @@ namespace DAL.Entities
             if (toEdit.Name != celebEntity.Name) toEdit.Name = celebEntity.Name;
             if (toEdit.Age != celebEntity.Age) toEdit.Age = celebEntity.Age;
             if (toEdit.Country != celebEntity.Country) toEdit.Country = celebEntity.Country;
-            if (Entry(toEdit).State == EntityState.Modified) SaveChanges();
+            SaveChanges();
         }
 
         public void DeleteCeleb(int id)

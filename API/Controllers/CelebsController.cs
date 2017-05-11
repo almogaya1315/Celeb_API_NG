@@ -16,6 +16,7 @@ namespace API.Controllers
         CelebContext db { get; set; }
 
         // GET: api/Celebs
+        [HttpGet]
         public IEnumerable<CelebModel> Get()
         {
             using (db = new CelebContext())
@@ -49,6 +50,7 @@ namespace API.Controllers
         }
 
         // POST: api/Celebs
+        [HttpPost]
         public void Post([FromBody]CelebModel model)
         {
             using (db = new CelebContext())
@@ -63,7 +65,8 @@ namespace API.Controllers
         }
 
         // PUT: api/Celebs/5
-        public void Put(int id, [FromBody]CelebModel model)
+        [HttpPut]
+        public void Put([FromUri]int id, [FromBody]CelebModel model)
         {
             using (db = new CelebContext())
             {
@@ -77,7 +80,8 @@ namespace API.Controllers
         }
 
         // DELETE: api/Celebs/5
-        public void Delete(int id)
+        [HttpDelete]
+        public void Delete([FromUri]int id)
         {
             using (db = new CelebContext())
             {
