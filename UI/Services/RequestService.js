@@ -15,11 +15,7 @@
             })
         };
 
-        function create (isCreate) {
-            return isCreate = !isCreate;
-        }
-
-        function save (celebs, current, isCreate) {
+        function save(celebs, current) {
             var c;
             for (var i = 0; i < celebs.length; i++) {
                 if (celebs[i].id == current.id)
@@ -34,7 +30,9 @@
                     method: "put",
                     url: putUrl,
                     data: data
-                }).then(InitPage(current, isCreate));
+                });
+
+                return c;
             }
             else {
                 celebs.push(current);
@@ -43,30 +41,25 @@
                     method: "post",
                     url: baseUrl,
                     data: vm.celeb
-                }).then(InitPage(current, isCreate))
+                });
+
+                return current;
             }
         }
 
-        function InitPage (current, isCreate) {
-            current = null;
-            create(isCreate);
-        }
-
-
-        vm.del = function (index, id) {
+        function del(index, id) {
             var delUrl = baseUrl + "/" + id;
             $http({
                 method: "delete",
                 url: delUrl
             });
-            vm.celebs.splice(index, 1);
+            return index;
         }
 
-        vm.put = function (celeb) {
-            if (!vm.isCreate) {
-                vm.isCreate = true;
-            }
-            vm.celeb = angular.copy(celeb);
+        function put(celebs, celeb) {
+            var c = angular.copy(celeb);
+            save(celeb, c);
+            return c;
         }
     }
 }());

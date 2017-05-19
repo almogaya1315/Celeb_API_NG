@@ -7,9 +7,31 @@
 
         vm.celebs = RequestService.initial();
 
-        vm.create = RequestService.create(vm.isCreate);
+        vm.save = function () {
+            vm.celeb = RequestService.save(vm.celebs, vm.celeb);
+            InitPage(vm.celeb);
+        }
 
-        vm.save = RequestService.save(vm.celebs, vm.celeb, vm.isCreate);
+        vm.del = function (index, id) {
+            var index = RequestService.del(index, id);
+            vm.celebs.splice(index, 1);
+        }
+
+        vm.put = function (celeb) {
+            if (!vm.isCreate) {
+                vm.isCreate = true;
+            }
+            vm.celeb = RequestService.put(celeb);
+        }
+
+        vm.create = function () {
+            return isCreate = !isCreate;
+        }
+
+        function InitPage(current) {
+            vm.celeb = null;
+            vm.create();
+        }
 
         $scope.$watch("vm.celeb", function (newValue) {
             vm.celeb = newValue;
