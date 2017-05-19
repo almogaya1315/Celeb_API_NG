@@ -1,4 +1,3 @@
 ﻿
 
-var app = angular.module("CelebPage", ["ngResource"])
-    .constant("appSettings", { serverPath: "http://localhost:56399/" });
+var app = angular.module("CelebPage", ["RequestService"]); 

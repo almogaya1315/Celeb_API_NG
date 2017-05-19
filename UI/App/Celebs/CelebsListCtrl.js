@@ -1,8 +1,8 @@
 ﻿
 (function () {
-    app.controller("CelebsListCtrl", ["CelebResource", "$scope", "$http", CelebsListCtrl]);
+    app.controller("CelebsListCtrl", ["$scope", "$http", CelebsListCtrl]);
 
-    function CelebsListCtrl(CelebResource, $scope, $http) {
+    function CelebsListCtrl($scope, $http) {
 
         var vm = this;
         var baseUrl = "http://localhost:56399/api/celebs";
@@ -14,22 +14,6 @@
             vm.celebs = response.data;
         });
 
-        //vm.celebs = [
-        //{
-        //    "name": "Test1",
-        //    "age": 54,
-        //    "country": "Test1"
-        //},
-        //{
-        //    "name": "Test2",
-        //    "age": 12,
-        //    "country": "Test2"
-        //}];
-
-        //CelebResource.query(function (data) {
-        //    vm.celebs = data;
-        //});
-
         vm.create = function () {
             vm.isCreate = !vm.isCreate;
         }
@@ -40,8 +24,6 @@
                 if (vm.celebs[i].id == vm.celeb.id)
                     c = vm.celebs[i];
             }
-
-            //var c = vm.celebs.find(c => c.id == vm.celeb.id)
 
             if (c) {
                 c = vm.celeb;
