@@ -11,45 +11,45 @@
                 method: "get",
                 url: baseUrl,
             }).then(function (response) {
-                vm.celebs = response.data;
+                return response.data;
             })
         };
 
-        function create () {
-            return  // vm.isCreate = !vm.isCreate;
+        function create (isCreate) {
+            return isCreate = !isCreate;
         }
 
-        vm.save = function () {
+        function save (celebs, current, isCreate) {
             var c;
-            for (var i = 0; i < vm.celebs.length; i++) {
-                if (vm.celebs[i].id == vm.celeb.id)
-                    c = vm.celebs[i];
+            for (var i = 0; i < celebs.length; i++) {
+                if (celebs[i].id == current.id)
+                    c = celebs[i];
             }
 
             if (c) {
-                c = vm.celeb;
+                c = current;
                 var putUrl = baseUrl + "/" + c.id;
                 var data = { "name": c.name, "age": c.age, "country": c.country }
                 $http({
                     method: "put",
                     url: putUrl,
                     data: data
-                }).then(vm.InitPage());
+                }).then(InitPage(current, isCreate));
             }
             else {
-                vm.celebs.push(vm.celeb);
+                celebs.push(current);
 
                 $http({
                     method: "post",
                     url: baseUrl,
                     data: vm.celeb
-                }).then(vm.InitPage())
+                }).then(InitPage(current, isCreate))
             }
         }
 
-        vm.InitPage = function () {
-            vm.celeb = null;
-            vm.create();
+        function InitPage (current, isCreate) {
+            current = null;
+            create(isCreate);
         }
 
 

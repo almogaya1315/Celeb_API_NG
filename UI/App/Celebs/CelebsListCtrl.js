@@ -5,9 +5,11 @@
     function CelebsListCtrl($scope, RequestService) {
         var vm = this;
 
-        RequestService.initial();
+        vm.celebs = RequestService.initial();
 
-        vm.create = RequestService.create();
+        vm.create = RequestService.create(vm.isCreate);
+
+        vm.save = RequestService.save(vm.celebs, vm.celeb, vm.isCreate);
 
         $scope.$watch("vm.celeb", function (newValue) {
             vm.celeb = newValue;
