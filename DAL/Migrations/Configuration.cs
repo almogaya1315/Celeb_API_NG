@@ -15,8 +15,8 @@ namespace DAL.Migrations
 
         protected override void Seed(DAL.Entities.CelebContext context)
         {
-            //context.Celebrities.Add(new CelebEntity() { Name = "Lior", Age = 32, Country = "Israel" });
-            //context.SaveChanges();
+            context.Celebrities.Add(new CelebEntity() { Name = "Lior", Age = 32, Country = "Israel" });
+            context.SaveChanges();
         }
     }
 }
