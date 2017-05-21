@@ -5,27 +5,34 @@
     function CelebsListCtrl($scope, RequestService) {
         var vm = this;
 
-        vm.celebs = RequestService.initial();
-
+        vm.$onInit = function () {
+            RequestService.initial().then(function (response) {
+                vm.celebs = response.data;
+            });
+        }
+        
         vm.save = function () {
-            vm.celeb = RequestService.save(vm.celebs, vm.celeb);
-            InitPage(vm.celeb);
+            RequestService.save(vm.celeb).then(function (response) {
+                vm.celebs = response.data;
+            });
+            InitPage();
         }
 
-        vm.del = function (index, id) {
-            var index = RequestService.del(index, id);
-            vm.celebs.splice(index, 1);
+        vm.del = function (id) {
+            RequestService.del(id).then(function (response) {
+                vm.celebs = response.data;
+            });
         }
 
         vm.put = function (celeb) {
             if (!vm.isCreate) {
                 vm.isCreate = true;
             }
-            vm.celeb = RequestService.put(celeb);
+            vm.celeb = angular.copy(celeb);
         }
 
         vm.create = function () {
-            return isCreate = !isCreate;
+            return vm.isCreate = !vm.isCreate;
         }
 
         function InitPage(current) {

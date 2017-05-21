@@ -24,10 +24,11 @@ namespace DAL.Entities
             return Celebrities.FirstOrDefault(c => c.Id == id);
         }
 
-        public void CreateCeleb(CelebEntity entity)
+        public int CreateCeleb(CelebEntity entity)
         {
-            Celebrities.Add(entity);
+            var e = Celebrities.Add(entity);
             SaveChanges();
+            return e.Id;
         }
 
         public void EditCeleb(int id, CelebEntity celebEntity)

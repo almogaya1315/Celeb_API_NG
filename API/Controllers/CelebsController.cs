@@ -17,7 +17,7 @@ namespace API.Controllers
 
         // GET: api/Celebs
         [HttpGet]
-        public IEnumerable<CelebModel> Get()
+        public IHttpActionResult Get()
         {
             using (db = new CelebContext())
             {
@@ -29,7 +29,7 @@ namespace API.Controllers
                     Age = entity.Age,
                     Country = entity.Country
                 });
-                return models;
+                return Ok<IEnumerable<CelebModel>>(models);
             }
         }
 
@@ -51,41 +51,66 @@ namespace API.Controllers
 
         // POST: api/Celebs
         [HttpPost]
-        public void Post([FromBody]CelebModel model)
+        public IHttpActionResult Post([FromBody]CelebModel model)
         {
             using (db = new CelebContext())
             {
-                db.CreateCeleb(new CelebEntity()
+                int id;
+                try
                 {
-                    Name = model.Name,
-                    Age = model.Age,
-                    Country = model.Country
-                });
+                    id = db.CreateCeleb(new CelebEntity()
+                    {
+                        Name = model.Name,
+                        Age = model.Age,
+                        Country = model.Country
+                    });
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                return Ok($"Id #{id} was added!");
             }
         }
 
         // PUT: api/Celebs/5
         [HttpPut]
-        public void Put([FromUri]int id, [FromBody]CelebModel model)
+        public IHttpActionResult Put([FromUri]int id, [FromBody]CelebModel model)
         {
             using (db = new CelebContext())
             {
-                db.EditCeleb(id, new CelebEntity()
+                try
                 {
-                    Name = model.Name,
-                    Age = model.Age,
-                    Country = model.Country
-                });
+                    db.EditCeleb(id, new CelebEntity()
+                    {
+                        Name = model.Name,
+                        Age = model.Age,
+                        Country = model.Country
+                    });
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                return Ok($"Id #{id} was changed!");
             }
         }
 
         // DELETE: api/Celebs/5
         [HttpDelete]
-        public void Delete([FromUri]int id)
+        public IHttpActionResult Delete([FromUri]int id)
         {
             using (db = new CelebContext())
             {
-                db.DeleteCeleb(id);
+                try
+                {
+                    db.DeleteCeleb(id);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                return Ok($"Id #{id} was deleted!");
             }
         }
     }

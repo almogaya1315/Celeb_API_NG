@@ -21,11 +21,11 @@
                     <td>{{celeb.name}}</td>
                     <td>{{celeb.age}}</td>
                     <td>{{celeb.country}}</td>
-                    <td><input type="button" value="del" ng-click="vm.del($index, celeb.id)"/></td>
+                    <td><input type="button" value="del" ng-click="vm.del(celeb.id)"/></td>
                     <td><input type="button" value="edit" ng-click="vm.put(celeb)"/></td>
                 </tr>
             </tbody>
-            <tfoot ng-init="vm.isCreate = false" ng-show="vm.isCreate">
+            <tfoot  ng-show="vm.isCreate">
                 <tr>
                     <td><input type="text" ng-model="vm.celeb.name"/></td>
                     <td><input type="number" min="0" ng-model="vm.celeb.age"/></td>

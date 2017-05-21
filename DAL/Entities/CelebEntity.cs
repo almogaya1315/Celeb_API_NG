@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace DAL.Entities
 {
     [Table("Celebrities")]
-    public class CelebEntity
+    public class CelebEntity 
     {
         [Key]
         public int Id { get; set; }

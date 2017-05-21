@@ -1,3 +1,3 @@
 ﻿
 
-var app = angular.module("CelebPage", ["RequestService"]); 
+var app = angular.module("CelebPage", []); 

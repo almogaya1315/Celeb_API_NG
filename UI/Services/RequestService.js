@@ -1,65 +1,53 @@
 ﻿
 (function () {
-    app.factory("RequestService", ["$http", ReqOperations]);
+    app.factory("RequestService", ["$http", "$log", ReqOperations]);
 
-    function ReqOperations($http) {
+    function ReqOperations($http, $log) {
 
         var baseUrl = "http://localhost:56399/api/celebs";
 
         function initial() {
-            $http({
+            return $http({
                 method: "get",
                 url: baseUrl,
-            }).then(function (response) {
-                return response.data;
             })
         };
 
-        function save(celebs, current) {
-            var c;
-            for (var i = 0; i < celebs.length; i++) {
-                if (celebs[i].id == current.id)
-                    c = celebs[i];
-            }
-
-            if (c) {
-                c = current;
-                var putUrl = baseUrl + "/" + c.id;
-                var data = { "name": c.name, "age": c.age, "country": c.country }
-                $http({
+        function save(celeb) {
+            if (celeb.id) {
+                var putUrl = baseUrl + "/" + celeb.id;
+                var data = { "name": celeb.name, "age": celeb.age, "country": celeb.country }
+                return $http({
                     method: "put",
                     url: putUrl,
                     data: data
-                });
-
-                return c;
+                }).then(r => handelResponse(r));
             }
             else {
-                celebs.push(current);
-
-                $http({
+                return $http({
                     method: "post",
                     url: baseUrl,
-                    data: vm.celeb
-                });
-
-                return current;
+                    data: celeb,
+                }).then(r => handelResponse(r));
             }
         }
 
-        function del(index, id) {
+        function del(id) {
             var delUrl = baseUrl + "/" + id;
-            $http({
+            return $http({
                 method: "delete",
                 url: delUrl
-            });
-            return index;
+            }).then(r =>  handelResponse(r));
         }
 
-        function put(celebs, celeb) {
-            var c = angular.copy(celeb);
-            save(celeb, c);
-            return c;
+        return { initial: initial, save: save, del: del }
+    }
+
+    function handelResponse(response) {
+        if (/^20/.test(response.status)) {
+            $log.info(response.data);
+            return initial();
         }
     }
+
 }());
