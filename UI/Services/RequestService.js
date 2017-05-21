@@ -40,14 +40,13 @@
             }).then(r =>  handelResponse(r));
         }
 
+        function handelResponse(response) {
+            if (/^20/.test(response.status)) {
+                $log.info(response.data);
+                return initial();
+            }
+        }
+
         return { initial: initial, save: save, del: del }
     }
-
-    function handelResponse(response) {
-        if (/^20/.test(response.status)) {
-            $log.info(response.data);
-            return initial();
-        }
-    }
-
 }());
